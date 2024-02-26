@@ -1,0 +1,175 @@
+---
+title: "PhytoBacExplorer Workshop"
+subtitle: "Interactive Session Walkthrough"
+author: "Theresa Wacker"
+slug: "PhytoBacExplorer-Workshop_walkthrough"
+
+output: 
+  bookdown::pdf_book: 
+    includes:
+      in_header: preamble.tex
+    toc_depth: 4
+  # bookdown::html_document2:
+  #   fontfamily: Arial
+  #   toc: true
+  #   toc_depth: 2
+  #   fig_caption: false
+  #   number_sections: true
+    #number_sections: true
+    # toc_float:
+    #   collapsed: false
+    #   smooth_scroll: false
+date: "`r format(Sys.time(), '%d/%m/%y')`"
+fig_caption: yes
+font_size: 12pt
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "/Users/theresawacker/repos/XanthomonasProject2023-2024/Presentations_and_Workshops/PhytobacExplorer_WS_Warwick_28-02-2024")
+knitr::opts_chunk$set(echo = TRUE, fig.align="center")
+```
+
+```{css style settings, echo = FALSE}
+blockquote {
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    font-size: 16px;
+    border-left: 5px solid #eee;
+}
+```
+
+\newpage
+
+
+
+# __First steps on PhytoBacExplorer__
+## Register!
+Register on [PhytoBacExplorer](https://phytobacexplorer.warwick.ac.uk/) (https://phytobacexplorer.warwick.ac.uk/).
+
+![](./Figures/Register1.png)
+
+This opens the registration dialogue
+<center>.
+
+![](./Figures/Register2.png){width=50%}
+</center>
+
+## Explore landing page. 
+
+After successful registration, we explore some of the most important aspects of the landing page:
+![](./Figures/LandingPage2.jpeg)
+
+# __Interactive exercise:__ download target and neighbour assemblies for diagnostic primer generation for *Xanthomonas vasicola pv. vasculorum*
+
+## Define and load targets and neighbours (=off-targets)
+
+__As an example we will load *Xanthomonas vasicola*__. You can choose any other target and neighbour (= off-targets) species. 
+
+__In the example, our <u>target</u> is *vasculorum*. Our <u> neighbours</u> are all other *Xv* assemblies that are <u>not</u> *vasculorum* on PhytoBacExplorer.__
+
+## Open "Search Strains dialogue"
+
+<center>
+![](./Figures/SearchXv.png){width=80%}
+</center>
+
+Other options for __Field__ in the ```Strain Metadata``` tab include:
+
+* __Uberstrain__: Certain records are duplicated in that there are many entries for what is essentially the same strain. This can skew analysis because your analysis may produce false clusters, which in reality are just the same strain. Thus in Enterobase such entries are merged and a single Uberstrain is created. 
+* __Name__
+* __Species__
+* __Pathvar__
+* __Race__
+* __Barcode__: not the assembly barcode that will be the name of the downloaded assemblies
+* __Data Source__: Accession No. etc. 
+* __Project__: Bio Project ID etc.
+
+Other __Operator__ options include:
+
+* __contains__: all entries where the ```Field``` contains the ```Value```
+* __in__: clicking into the ```Value``` field will open a dialogue which allows you to insert lists of values separated by comma or whitespace.
+* __not contains__: all entries where the ```Field``` does __not__ contain the ```Value```
+* __equals__: all entries where ```Field``` is exactly what is defined in ```Value```
+* __not equals__: all entries where ```Field``` is __not__ exactly what is defined in ```Value```
+
+Below that, the ```AND``` button will allow you to search the same or different ```Field```s that are contain, not contain etc. values. Entries returned will have to fullfill __all__ defined criteria
+
+> This means that when you search for two different species using ```AND``` no entries will be returned because there are no entries that are two different species at the same time
+
+Alternatively, you can use the ```OR``` button, which will return any entrie that has a ```Field``` of a certain ```Value``` __or__ other ```Field```s and ```Values```s.
+
+> For instance you, you can search for entries that are *fragariae* or *campestris*, which will return all assemblies that are *fragariae* and all that are *campestris*
+
+## Select assemblies and generate GrapeTree
+
+We first select all assemblies:
+<center>
+
+![](./Figures/Select.png)
+</center>
+
+then, in the top right corner we change ```Experimental Data``` to "Almeida_6_gene_MLST" and click the Grape Tree symbol:
+
+![](./Figures/Grapetree.png)
+
+The ```Create GrapeTree``` dialogue opens and we can give the tree a name, as well as chose between minimum spanning tree algorithms or neighbourhood joining algorithms. Both generate trees based on MLST allelic profiles ^[compare https://enterobase.readthedocs.io/en/latest/grapetree/tutorial-2.html?highlight=grape%20tree and Z Zhou, NF Alikhan, MJ Sergeant, N Luhmann, C Vaz, AP Francisco, JA Carrico, M Achtman (2018) “GrapeTree: Visualization of core genomic relationships among 100,000 bacterial pathogens”, Genome Res. doi: https://doi.org/10.1101/gr.232397.117].
+Since we do not have missing data (all entries have defined STs), I chose a simple NJ algorithm (Ninja NJ).
+
+<center>
+![](./Figures/GrapeTreeWindow.png){width=50%}
+</center>
+
+> Suggestion: if you want to, try out multiple different algorithms and compare topology. 
+
+## Annotate your GrapeTree
+We can annotate our tree by clicking on the legend and choosing which metadata we want to colour it by:
+![](./Figures/Legend.png)
+
+> Suggestion: try colouring by other metadata, like country, too. 
+
+</br>
+</br>
+We can also annotate the nodes and show their labels. We are interested in the __STs__:
+
+![](./Figures/AnnotateTree.png)
+
+## Extracting the relevant STs of our target pathovar
+
+Our __target STs__ in the Example are __67, 138 and 399__.
+
+We can press ```Shift``` and click on the nodes to select them. Then we can click ```Load Selected``` in the left panel.
+
+![](./Figures/LoadSelected.png)
+
+We then see the metadata of all the strains. 
+
+We can __right-click > select all__ again and then download the selected __target assemblies__ for further downstream processing:
+
+![](./Figures/Download.png){width=80%}
+
+# Further Reading:
+
+## on PhytoBacExplorer/ Enterobase:
+
+* [Enterobase Documentation](https://enterobase.readthedocs.io/en/latest/features/main-search-page.html): https://enterobase.readthedocs.io/en/latest/features/main-search-page.html
+* [GrapeTree Documentation]( https://enterobase.readthedocs.io/en/latest/grapetree/grapetree-about.html): https://enterobase.readthedocs.io/en/latest/grapetree/grapetree-about.html
+* [Enterobase Publication](https://doi.org/10.1101/gr.251678.119): https://doi.org/10.1101/gr.251678.119
+
+
+## on MLSTs:
+
+* MLST scheme based on *Almeida et al.*: doi:10.1094/PHYTO-100-3-0208
+* general explanation of MLSTs:
+  * [Ridom Bioinformatics](https://www.ridom.de/seqsphere/cgmlst/):https://www.ridom.de/seqsphere/cgmlst/ (picture copyright belongs to Ridom Bioinformatics)
+  ![](./Figures/typing_pyramid.png){width=70%}
+  * [PubMLST](https://pubmlst.org/multilocus-sequence-typing): https://pubmlst.org/multilocus-sequence-typing
+
+
+# Questions?
+
+* Laura Baxter: laura.baxter@warwick.ac.uk
+* Sascha Ott: s.ott@warwick.ac.uk
+* Theresa Wacker: t.wacker2@exeter.ac.uk
+* Regular drop-in session via Zoom on most Tuesdays between 9 am and 12 noon (UK time):  https://zoom.us/j/8852150277
